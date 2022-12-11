@@ -1,27 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-        <form class="pt-5 mt-2">
+        <form id="signupForm" class="pt-5 mt-2" method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
             <h3>Sign Up</h3>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input required type="text" class="form-control" id="username" placeholder="Enter username">
+                <input name="username" required type="text" class="form-control" id="username"
+                       placeholder="Enter username">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input required type="email" class="form-control" id="email" placeholder="Enter email">
+                <input name="email" required type="email" class="form-control" id="email" placeholder="Enter email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input required type="email" class="form-control" id="password" placeholder="Enter password">
+                <input name="password" required type="password" class="form-control" id="password"
+                       placeholder="Enter password">
             </div>
             <div class="mb-3">
                 <label for="passwordConfirm" class="form-label">Password Confirm</label>
-                <input type="password" class="form-control" id="passwordConfirm" placeholder="Enter password(again)">
+                <input name="passwordConfirm" type="password" class="form-control" id="passwordConfirm"
+                       placeholder="Enter password(again)">
             </div>
+            {% if error  %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
             <div>
                 <button class="btn btn-primary">Create User</button>
             </div>
         </form>
     </div>
+    <script>
+        const password = document.getElementById('password');
+        const passwordConfirm = document.getElementById('passwordConfirm');
+        const form = document.getElementById('signupForm');
+        form.addEventListener('submit', (e) => {
+            if (password.value !== passwordConfirm.value) {
+                e.preventDefault();
+                alert('Passwords do not match');
+            }
+        })
+    </script>
 {% endblock %}

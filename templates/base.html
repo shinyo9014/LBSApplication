@@ -10,21 +10,30 @@
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="/" class="navbar-brand d-flex align-items-center">
                 <strong>AWM2023</strong>
             </a>
+            <div class="d-flex flex-row align-items-center">
+                <div class="text-light me-2">      {{ request.session.firstName }}</div>
 
-            <div class="dropdown text-end">
-                <button class="navbar-toggler" data-bs-toggle="dropdown">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="dropdown text-end">
+                    <button class="navbar-toggler" data-bs-toggle="dropdown">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
-                    <li><a class="dropdown-item" href="{% url 'login' %}">Log In</a></li>
-                    <li><a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a></li>
-
-                </ul>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+                        {% if request.session.username %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Map</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'password' %}">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Log In</a></li>
+                            <li><a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <form  class="pt-5 mt-2" method="post" action="{% url 'profile' %}">
+            {% csrf_token %}
+            <h3>Update Profile</h3>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input value="{{ user.first_name|default:"" }}" name="firstName" required type="text" class="form-control" id="firstName"
+                       placeholder="Enter first name">
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input value="{{ user.last_name|default:"" }}" name="lastName" required type="text" class="form-control" id="lastName"
+                       placeholder="Enter last name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input value="{{ user.email }}" name="email" required type="email" class="form-control" id="email" placeholder="Enter email">
+            </div>
+
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <div>
+                <button class="btn btn-primary">Update User Profile</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

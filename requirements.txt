@@ -1,2 +1,4 @@
 django-leaflet==0.28.3
 django
+psycopg2
+gdal

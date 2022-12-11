@@ -27,14 +27,11 @@ class WorldBorder(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    modified = models.DateTimeField(auto_now=True, editable=False)
-    last_location = models.PointField(
-        editable=False,
-        blank=True,
-        null=True,
-        default=None)
+    username = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100,null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(max_length=254)
+    password = models.CharField(max_length=1024)
 
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.username} {self.email}"

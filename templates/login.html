@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-       <form class="pt-5 mt-2">
+        <form class="pt-5 mt-2" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
             <h3>Login</h3>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Your username">
+                <input required name="username" type="text" class="form-control" id="username"
+                       placeholder="Your username">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Your password">
+                <input required name="password" type="password" class="form-control" id="password"
+                       placeholder="Your password">
             </div>
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
             <div>
                 <button class="btn btn-primary">Login</button>
             </div>
