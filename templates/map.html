@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load leaflet_tags %}
+{% block head %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% leaflet_map "map" callback="window.map_init_basic" %}
+    <script>
+        function map_init_basic(map, options) {
+            map.setView([53.5, -8.5], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+                maxZoom: 18,
+            }).addTo(map);
+            updateLocation(map);
+        }
+
+        function updateLocation(map) {
+            navigator.geolocation.getCurrentPosition(
+                function (pos) {
+                    setMapToCurrentLocation(map, pos);
+                },
+                function (err) {
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 30000
+                }
+            );
+        }
+
+        function setMapToCurrentLocation(map, pos) {
+            const myLatLon = L.latLng(pos.coords.latitude, pos.coords.longitude);
+            map.flyTo(myLatLon, 16);
+            L.marker(myLatLon).addTo(map);
+        }
+    </script>
+{% endblock %}
