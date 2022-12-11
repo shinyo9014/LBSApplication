@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <form class="pt-5 mt-2">
+            <h3>Sign Up</h3>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input required type="text" class="form-control" id="username" placeholder="Enter username">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input required type="email" class="form-control" id="email" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input required type="email" class="form-control" id="password" placeholder="Enter password">
+            </div>
+            <div class="mb-3">
+                <label for="passwordConfirm" class="form-label">Password Confirm</label>
+                <input type="password" class="form-control" id="passwordConfirm" placeholder="Enter password(again)">
+            </div>
+            <div>
+                <button class="btn btn-primary">Create User</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
